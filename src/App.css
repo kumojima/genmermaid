@@ -67,6 +67,11 @@ kbd { padding: 2px 4px; border: 1px solid #e5e9e3; border-radius: 3px; color: #8
 .panels { height: 100%; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
 .panel { height: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
 .panel-heading { flex: 0 0 64px; height: 64px; }
+.sample-toolbar { min-height: 48px; padding: 8px 14px; box-sizing: border-box; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #edf0eb; background: #fff; }
+.sample-toolbar > span { margin: 0 3px 0 2px; color: #929e95; font-size: 10px; font-weight: 650; white-space: nowrap; }
+.sample-toolbar button { padding: 5px 8px; border: 1px solid #e4eae3; border-radius: 5px; color: #61746a; background: #fbfcfa; font: 550 10px var(--sans); white-space: nowrap; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+.sample-toolbar button:hover { border-color: #b8d1c0; color: #39745e; background: #f2f8f2; }
+.sample-toolbar button:focus-visible { outline: 2px solid #8eba9c; outline-offset: 2px; }
 .editor-wrap { flex: 1 1 auto; height: auto; min-height: 0; }
 .editor-footer { flex: 0 0 34px; height: 34px; box-sizing: border-box; }
 .preview-canvas { flex: 1 1 auto; height: auto; min-height: 0; }

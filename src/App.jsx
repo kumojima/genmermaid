@@ -9,6 +9,66 @@ const starterDiagram = `flowchart TD
   D --> A
   C --> E[完了]`
 
+const diagramSamples = [
+  {
+    name: 'フローチャート',
+    source: `flowchart TD
+  A[注文を受ける] --> B{在庫はある？}
+  B -->|はい| C[商品を発送]
+  B -->|いいえ| D[入荷を待つ]
+  D --> C
+  C --> E[完了]`,
+  },
+  {
+    name: 'シーケンス図',
+    source: `sequenceDiagram
+  actor User as ユーザー
+  participant App as アプリ
+  participant API as API
+  User->>App: ログイン
+  App->>API: 認証リクエスト
+  API-->>App: 認証結果
+  App-->>User: ログイン完了`,
+  },
+  {
+    name: 'ER図',
+    source: `erDiagram
+  USER ||--o{ ORDER : places
+  ORDER ||--|{ ORDER_ITEM : contains
+  PRODUCT ||--o{ ORDER_ITEM : includes
+  USER {
+    int id PK
+    string name
+  }
+  ORDER {
+    int id PK
+    date ordered_at
+  }
+  PRODUCT {
+    int id PK
+    string name
+  }`,
+  },
+  {
+    name: 'データフロー図',
+    source: `flowchart LR
+  User[ユーザー] -->|入力データ| App[アプリ]
+  App -->|保存リクエスト| DB[(データベース)]
+  DB -->|保存結果| App
+  App -->|表示データ| User`,
+  },
+  {
+    name: '状態遷移図',
+    source: `stateDiagram-v2
+  [*] --> 下書き
+  下書き --> 申請中: 申請
+  申請中 --> 承認: 承認
+  申請中 --> 下書き: 差し戻し
+  承認 --> 公開: 公開する
+  公開 --> [*]`,
+  },
+]
+
 mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'strict' })
 
 function App() {
@@ -91,6 +151,14 @@ function App() {
             <div className="panel-heading">
               <div className="heading-label"><span className="step-number">01</span><div><h2 id="editor-title">エディター</h2><p>Mermaid 記法を入力</p></div></div>
               <span className="language-tag"><span /> MERMAID</span>
+            </div>
+            <div className="sample-toolbar" aria-label="サンプルを挿入">
+              <span>サンプル</span>
+              {diagramSamples.map((sample) => (
+                <button key={sample.name} type="button" onClick={() => { setSource(sample.source); setError('') }}>
+                  {sample.name}
+                </button>
+              ))}
             </div>
             <div className="editor-wrap">
               <div className="line-numbers" aria-hidden="true">{source.split('\n').map((_, index) => <span key={index}>{String(index + 1).padStart(2, '0')}</span>)}</div>
